@@ -1,0 +1,1 @@
+export {TrashReminder} from "./trash_reminder/trash_reminder"
