@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 export function TrashReminder({todayObj, tomorrowObj}: ThrowObjects){
     return (
-        <section className="bg-emerald-400 text-white py-8 rounded-3xl">
+        <section className="bg-emerald-400 text-white p-8 rounded-3xl">
             <p className="text-lg md:text-xl lg:text-2xl mb-2">Oggi si butta <strong>{todayObj}</strong></p>
             <p className="text-xl lg:text-xl mb-6">Domani si butta <strong>{tomorrowObj}</strong></p>
 
