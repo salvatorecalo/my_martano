@@ -2,8 +2,7 @@
     "crons": [
         {
             "path": "/(utils)/functions/send-trash-notification",
-            "schedule": "0 22 * * *",
-            "scheduleTimezone": "Europe/Rome"
+            "schedule": "0 22 * * *"
         }
     ]
 }
