@@ -36,7 +36,7 @@ export async function GET(request: Request){
     try {
         // sunday needs to be the first since javascript getDay starts counting by Sunday
         const daysOfWeek = ["domenica", "lunedi", "martedi", "mercoledi", "giovedi", "venerdi", "sabato"]
-        const tomorrowIndex = (new Date().getDay() + 1) % 7
+        const tomorrowIndex = (new Date().getDay() + 1) % 6
         const tomorrowDay = daysOfWeek[tomorrowIndex]
 
         const calendar = await fetchTrashRoutine()
