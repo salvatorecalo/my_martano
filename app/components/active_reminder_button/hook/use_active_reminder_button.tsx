@@ -8,7 +8,7 @@ export function useActiveReminderButton(setUpdatedPermission: Dispatch<SetStateA
 
         // send the local notification to ask permission
         const permission = await Notification.requestPermission()
-        if (permission !== "granted") return alert("Permesso negato")
+        if (permission !== "granted") return alert("Hai negato il permesso a inviare notifiche")
         setUpdatedPermission(permission)
         // we generate the subscription
         const sub = await reg.pushManager.subscribe({
