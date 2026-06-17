@@ -1,10 +1,19 @@
 import { urlBase64ToUint8Array } from "@/app/(utils)/functions/"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 
 export function useActiveReminderButton(setUpdatedPermission: Dispatch<SetStateAction<NotificationPermission | null>>){
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && "serviceWorker" in navigator){
+            navigator.serviceWorker.register("/sw.js")
+                .then((reg) => console.log("Service worker ready: ", reg.scope))
+                .catch(err => console.error("Error SW:", err))
+        }
+    }, [])
+    
     const activePush = async () => {
         // register the service worker
-        const reg = await navigator.serviceWorker.register("/sw.js")
+        const reg = await navigator.serviceWorker.ready
 
         // send the local notification to ask permission
         const permission = await Notification.requestPermission()

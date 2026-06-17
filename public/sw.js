@@ -11,4 +11,5 @@ self.addEventListener("push", (event) => {
         vibrate: [200, 100, 200],
         badge: "/trash.png"
     })
+    console.log("fired")
 })
