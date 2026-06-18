@@ -2,7 +2,7 @@
     "crons": [
         {
             "path": "/(utils)/functions/send-trash-notification",
-            "schedule": "0 15 * * *"
+            "schedule": "0 13 10 * *"
         }
     ]
 }
