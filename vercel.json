@@ -1,8 +1,8 @@
 {
     "crons": [
         {
-            "path": "/(utils)/functions/send-trash-notification",
-            "schedule": "50 15 * * *"
+            "path": "/server_functions/cron/send-trash-notification/",
+            "schedule": "56 15 * * *"
         }
     ]
 }
