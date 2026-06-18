@@ -66,7 +66,7 @@ export async function GET(request: Request){
         })
 
         const deliveryPromises = userSubscription.map((subscription) => {
-            webpush.sendNotification(subscription, notificationPayload).catch(async (err) => {
+            return webpush.sendNotification(subscription, notificationPayload).catch(async (err) => {
                 if (err.statusCode === 410 || err.statusCode === 404) {
                     // remove the first 0 occurences of subscription from trash_subs
                     // count = 0: Remove all elements equal to element.
