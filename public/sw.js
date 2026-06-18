@@ -3,7 +3,15 @@
 // the self paramter it's a global variable from the browser
 self.addEventListener("push", (event) => {
     if (!event.data) return
-    const data = event.data.json()
+    
+    try {
+        const data = event.data.json()
+    } catch (e) {
+        data = { 
+            title: 'Test Message', 
+            body: event.data.text() 
+        };
+    }
 
     event.waitUntil(
         self.registration.showNotification(data.title, {
