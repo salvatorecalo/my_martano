@@ -5,11 +5,12 @@ self.addEventListener("push", (event) => {
     if (!event.data) return
     const data = event.data.json()
 
-    self.registration.showNotification(data.title, {
-        body: data.body,
-        icon: data.icon || "/trash.png",
-        vibrate: [200, 100, 200],
-        badge: "/trash.png"
-    })
-    console.log("fired")
+    event.waitUntil(
+        self.registration.showNotification(data.title, {
+            body: data.body,
+            icon: data.icon || "/trash.png",
+            vibrate: [200, 100, 200],
+            badge: "/trash.png"
+        })
+    )
 })
