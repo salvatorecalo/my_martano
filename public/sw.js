@@ -3,12 +3,12 @@
 // the self paramter it's a global variable from the browser
 self.addEventListener("push", (event) => {
     if (!event.data) return
-    
+    let data;
     try {
-        const data = event.data.json()
+        data = event.data.json()
     } catch (e) {
         data = { 
-            title: 'Test Message', 
+            title: 'Promemoria Spazzatura', 
             body: event.data.text() 
         };
     }
@@ -21,4 +21,8 @@ self.addEventListener("push", (event) => {
             badge: "/trash.png"
         })
     )
+})
+
+self.addEventListener("notificationclick", (event) => {
+    event.notification.close()
 })
