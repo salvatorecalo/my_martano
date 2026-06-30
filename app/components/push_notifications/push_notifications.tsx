@@ -10,7 +10,7 @@ export default function PushNotifications() {
             if (typeof window !== "undefined") {
                 await OneSignal.init({
                     appId: process.env.NEXT_PUBLIC_ONE_SIGNAL_APP_ID ?? "",
-                    allowLocalhostAsSecureOrigin: true,
+                    allowLocalhostAsSecureOrigin: process.env.NODE_ENV === 'development',
                 })
 
                 // appear the notification panel
