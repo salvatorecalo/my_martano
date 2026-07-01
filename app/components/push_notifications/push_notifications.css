@@ -1,0 +1,14 @@
+.alert-permission {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    border: 1px solid var(--foreground);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.alert-permission button {
+    background: var(--blue);
+    color: var(--white);
+}
