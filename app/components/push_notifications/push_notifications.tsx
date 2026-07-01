@@ -18,14 +18,6 @@ export default function PushNotifications() {
                 await OneSignal.init({
                     appId: process.env.NEXT_PUBLIC_ONE_SIGNAL_APP_ID ?? "",
                 })
-
-                const hasPermission: boolean = OneSignal.Notifications.permission
-                if (!hasPermission) {
-                    setHasUserDeniedPermission(true)
-                } else {
-                    // appear the notification panel
-                    OneSignal.Slidedown.promptPush()
-                }
                 OneSignal.Notifications.addEventListener('permissionChange', (permission) => {
                     if (permission) {
                         setHasUserDeniedPermission(false);
