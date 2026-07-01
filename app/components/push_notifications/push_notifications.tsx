@@ -9,7 +9,6 @@ export default function PushNotifications() {
 
     function showPanel(){
         OneSignal.Slidedown.promptPush()
-        window.location.reload()
     }
     
     useEffect(() => {
@@ -27,6 +26,11 @@ export default function PushNotifications() {
                     // appear the notification panel
                     OneSignal.Slidedown.promptPush()
                 }
+                OneSignal.Notifications.addEventListener('permissionChange', (permission) => {
+                    if (permission) {
+                        setHasUserDeniedPermission(false);
+                    }
+                });
             }
         }
         initOneSignal()
