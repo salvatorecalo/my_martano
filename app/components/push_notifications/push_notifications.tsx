@@ -40,7 +40,7 @@ export default function PushNotifications() {
         return (
             <div className="alert-permission">
                 <p>Le notifiche sono disattivate. Per ricevere i promemoria, devi attivarle dalle impostazioni del browser.</p>
-                <button onClick={() => showPanel()}>Attiva notifiche</button>
+                <button onClick={showPanel}>Attiva notifiche</button>
             </div>
         );
     }
