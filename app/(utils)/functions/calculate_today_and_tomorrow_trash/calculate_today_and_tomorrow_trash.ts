@@ -1,4 +1,4 @@
-import { GIORNI_VALIDI } from "../../constants";
+import { CALENDARIO_MARTANO, GIORNI_VALIDI } from "../../constants";
 import { fetchTrashRoutine } from "../../server_functions/fetch_trash_routine/fetch_trash_routine";
 
 export interface ThrowObjects {
@@ -37,5 +37,10 @@ export async function calculateTodayAndTomorrowTrash() {
             objThrows.tomorrowMaterials.push(item.material)
         }
     })
+
+    if (objThrows.todayMaterials.length === 0 || objThrows.tomorrowMaterials.length === 0){
+        objThrows.todayMaterials = [CALENDARIO_MARTANO[todayIndex]["material"]]
+        objThrows.tomorrowMaterials = [CALENDARIO_MARTANO[tomorrowIndex]["material"]]
+    }
     return objThrows
 }
