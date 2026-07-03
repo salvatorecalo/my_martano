@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { getTrashColor } from "../(utils)/functions";
-import { fetchTrashRoutine } from "../(utils)/server_functions/fetch_trash_routine/fetch_trash_routine"
+import { CALENDARIO_MARTANO } from "../(utils)/constants";
 
 export default async function TrashRoutine() {
-    const calendar = await fetchTrashRoutine()
 
     return (
         <section className="max-w-2xl mx-auto px-4 my-8">
@@ -20,7 +19,7 @@ export default async function TrashRoutine() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
-                        {calendar && calendar.map((item, idx) => {
+                        {CALENDARIO_MARTANO.map((item, idx) => {
                             const colors = getTrashColor(item.material);
                             return (
                                 <tr key={idx} className="hover:bg-slate-50/70 transition-colors">

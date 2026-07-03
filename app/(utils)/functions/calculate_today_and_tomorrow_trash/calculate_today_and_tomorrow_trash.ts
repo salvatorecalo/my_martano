@@ -21,7 +21,7 @@ export async function calculateTodayAndTomorrowTrash() {
     }
 
     const objThrows: ThrowObjects = {
-        todayMaterial:  CALENDARIO_MARTANO[tomorrowIndex].material,
+        todayMaterial:  CALENDARIO_MARTANO[todayIndex].material,
         tomorrowMaterial:  CALENDARIO_MARTANO[tomorrowIndex].material,
     }
 
