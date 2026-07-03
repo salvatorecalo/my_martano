@@ -7,7 +7,12 @@ export interface ThrowObjects {
 }
 
 export async function calculateTodayAndTomorrowTrash() {
-    const calendar = await fetchTrashRoutine()
+    let calendar = await fetchTrashRoutine()
+
+    if (!calendar) {
+        console.log("⚠️ Scraping fallito o pagina offline. Attivo il fallback statico!");
+        calendar = CALENDARIO_MARTANO;
+    }
     const now = new Date()
     const romeTimeString = now.toLocaleString("en-US", { timeZone: "Europe/Rome" })
     const jsToday = new Date(romeTimeString).getDay()
@@ -38,9 +43,5 @@ export async function calculateTodayAndTomorrowTrash() {
         }
     })
 
-    if (objThrows.todayMaterials.length === 0 || objThrows.tomorrowMaterials.length === 0){
-        objThrows.todayMaterials = [CALENDARIO_MARTANO[todayIndex]["material"]]
-        objThrows.tomorrowMaterials = [CALENDARIO_MARTANO[tomorrowIndex]["material"]]
-    }
     return objThrows
 }
