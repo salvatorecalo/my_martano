@@ -7,6 +7,7 @@ interface CalendarItem {
 }
 export async function fetchTrashRoutine(){
     try {
+        console.log("Sto provando a fare fetch su questo URL esatto:", TRASH_ROUTINE_URL);
         const res = await fetch(
             TRASH_ROUTINE_URL,
             {
