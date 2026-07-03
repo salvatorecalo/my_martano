@@ -5,8 +5,8 @@ import { FaArrowRight } from "react-icons/fa6";
 export function TrashReminder({todayMaterials, tomorrowMaterials}: ThrowObjects){
     return (
         <section className="bg-emerald-400 text-white p-8 my-8 rounded-3xl">
-            <p className="text-lg md:text-xl lg:text-2xl mb-2">Oggi si butta <strong>{todayMaterials.length > 0 ? todayMaterials.join(", ") : "Nessun ritiro"}</strong></p>
-            <p className="text-xl lg:text-xl mb-6">Domani si butta <strong>{tomorrowMaterials.length > 0 ? tomorrowMaterials.join(", ") : "Nessun ritiro"}</strong></p>
+            <p className="text-lg md:text-xl lg:text-2xl mb-2">{todayMaterials.length > 0 ? `Oggi si butta ${todayMaterials.join(", ")}` : "Nessun ritiro"}</p>
+            <p className="text-xl lg:text-xl mb-6">{todayMaterials.length > 0 ? `Domani si butta ${tomorrowMaterials.join(", ")}` : "Nessun ritiro"}</p>
 
             <div className="flex items-center gap-2">
                 <Link href="/trash-routine" className="text-lg xl:text-xl">

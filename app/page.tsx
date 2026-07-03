@@ -2,6 +2,8 @@ import { calculateTodayAndTomorrowTrash } from "./(utils)/functions/";
 import { TrashReminder, PhoneNumbers } from "./components";
 import PushNotifications from "./components/push_notifications/push_notifications";
 
+export const dynamic = "force-dynamic"
+
 export default async function Home() {
   const {todayMaterials, tomorrowMaterials} =  await calculateTodayAndTomorrowTrash()
   return (

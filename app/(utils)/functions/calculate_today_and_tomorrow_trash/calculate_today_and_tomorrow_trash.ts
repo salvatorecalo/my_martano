@@ -6,18 +6,20 @@ export interface ThrowObjects {
     tomorrowMaterials: string[]
 }
 
-export async function calculateTodayAndTomorrowTrash(){
+export async function calculateTodayAndTomorrowTrash() {
     const calendar = await fetchTrashRoutine()
-    const jsToday = new Date().getDay()
+    const now = new Date()
+    const romeTimeString = now.toLocaleString("en-US", { timeZone: "Europe/Rome" })
+    const jsToday = new Date(romeTimeString).getDay()
     let todayIndex = -1;
     let tomorrowIndex = -1;
 
-    if (todayIndex == 0){
+    if (jsToday === 0) {
         // today is sunday no one will take out our rubbish so we don't touch todayIndex that rest to unknow value (-1)
         tomorrowIndex = 0;
     } else {
         todayIndex = jsToday - 1;
-        tomorrowIndex = (todayIndex + 1) % 6
+        tomorrowIndex = (todayIndex + 1) % 7
     }
     const today: string | null = todayIndex === -1 ? null : GIORNI_VALIDI[todayIndex]
     const tomorrow: string = GIORNI_VALIDI[tomorrowIndex]
@@ -28,10 +30,10 @@ export async function calculateTodayAndTomorrowTrash(){
     }
 
     calendar?.forEach((item) => {
-        if (today && item.days.includes(today)){
+        if (today && item.days.includes(today)) {
             objThrows.todayMaterials.push(item.material)
         }
-        if (item.days.includes(tomorrow)){
+        if (item.days.includes(tomorrow)) {
             objThrows.tomorrowMaterials.push(item.material)
         }
     })
