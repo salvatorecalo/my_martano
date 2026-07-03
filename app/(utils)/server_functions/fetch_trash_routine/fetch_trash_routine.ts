@@ -10,7 +10,7 @@ export async function fetchTrashRoutine(){
         const res = await fetch(
             TRASH_ROUTINE_URL,
             {
-                next: {revalidate: 86400} // I refresh it every day
+                next: {revalidate: 86400}, // I refresh it every day
             }
         )
 
@@ -19,6 +19,7 @@ export async function fetchTrashRoutine(){
         }
 
         const html = await res.text()
+        console.log(html)
         const $ = cheerio.load(html)
         const calendar: CalendarItem[] = []
         
