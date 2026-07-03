@@ -1,4 +1,4 @@
-import { GIORNI_VALIDI } from "../../constants";
+import { CALENDARIO_MARTANO, GIORNI_VALIDI } from "../../constants";
 import { fetchTrashRoutine } from "../../server_functions/fetch_trash_routine/fetch_trash_routine";
 
 export interface ThrowObjects {
@@ -7,7 +7,12 @@ export interface ThrowObjects {
 }
 
 export async function calculateTodayAndTomorrowTrash() {
-    const calendar = await fetchTrashRoutine()
+    let calendar = await fetchTrashRoutine()
+
+    if (!calendar) {
+        console.log("⚠️ Scraping fallito o pagina offline. Attivo il fallback statico!");
+        calendar = CALENDARIO_MARTANO;
+    }
     const now = new Date()
     const romeTimeString = now.toLocaleString("en-US", { timeZone: "Europe/Rome" })
     const jsToday = new Date(romeTimeString).getDay()
@@ -37,5 +42,6 @@ export async function calculateTodayAndTomorrowTrash() {
             objThrows.tomorrowMaterials.push(item.material)
         }
     })
+
     return objThrows
 }
