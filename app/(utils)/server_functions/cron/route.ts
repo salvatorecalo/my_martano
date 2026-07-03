@@ -30,7 +30,7 @@ export async function GET(request: Request) {
             },
             body: JSON.stringify({
                 app_id: process.env.NEXT_PUBLIC_ONE_SIGNAL_APP_ID, 
-                included_segments: ["Subscribed Users"],
+                included_segments: ["Total Subscriptions"],
                 headings: { it: "🗑️ Promemoria Spazzatura" },
                 contents: { it: `Domani è ${tomorrowDay}. Il materiale da esporre è: ${tomorrowTrash.material}` }
             })
