@@ -1,18 +1,11 @@
-import { CALENDARIO_MARTANO, GIORNI_VALIDI } from "../../constants";
-import { fetchTrashRoutine } from "../../server_functions/fetch_trash_routine/fetch_trash_routine";
+import { CALENDARIO_MARTANO } from "../../constants";
 
 export interface ThrowObjects {
-    todayMaterials: string[],
-    tomorrowMaterials: string[]
+    todayMaterial: string,
+    tomorrowMaterial: string
 }
 
 export async function calculateTodayAndTomorrowTrash() {
-    let calendar = await fetchTrashRoutine()
-
-    if (!calendar) {
-        console.log("⚠️ Scraping fallito o pagina offline. Attivo il fallback statico!");
-        calendar = CALENDARIO_MARTANO;
-    }
     const now = new Date()
     const romeTimeString = now.toLocaleString("en-US", { timeZone: "Europe/Rome" })
     const jsToday = new Date(romeTimeString).getDay()
@@ -26,22 +19,11 @@ export async function calculateTodayAndTomorrowTrash() {
         todayIndex = jsToday - 1;
         tomorrowIndex = (todayIndex + 1) % 7
     }
-    const today: string | null = todayIndex === -1 ? null : GIORNI_VALIDI[todayIndex]
-    const tomorrow: string = GIORNI_VALIDI[tomorrowIndex]
 
     const objThrows: ThrowObjects = {
-        todayMaterials: [],
-        tomorrowMaterials: [],
+        todayMaterial:  CALENDARIO_MARTANO[tomorrowIndex].material,
+        tomorrowMaterial:  CALENDARIO_MARTANO[tomorrowIndex].material,
     }
-
-    calendar?.forEach((item) => {
-        if (today && item.days.includes(today)) {
-            objThrows.todayMaterials.push(item.material)
-        }
-        if (item.days.includes(tomorrow)) {
-            objThrows.tomorrowMaterials.push(item.material)
-        }
-    })
 
     return objThrows
 }
