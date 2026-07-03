@@ -5,11 +5,11 @@ import PushNotifications from "./components/push_notifications/push_notification
 export const dynamic = "force-dynamic"
 
 export default async function Home() {
-  const {todayMaterials, tomorrowMaterials} =  await calculateTodayAndTomorrowTrash()
+  const {todayMaterial, tomorrowMaterial} =  await calculateTodayAndTomorrowTrash()
   return (
     <main className="mx-10 lg:mx-8">
       <PushNotifications />
-      <TrashReminder todayMaterials={todayMaterials} tomorrowMaterials={tomorrowMaterials} />
+      <TrashReminder todayMaterial={todayMaterial} tomorrowMaterial={tomorrowMaterial} />
       <PhoneNumbers />
     </main>
   );
