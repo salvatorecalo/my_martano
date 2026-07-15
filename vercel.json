@@ -1,7 +1,7 @@
 {
     "crons": [
         {
-            "path": "/server_functions/cron/",
+            "path": "/server_functions/cron",
             "schedule": "0 18 * * *"
         }
     ]

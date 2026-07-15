@@ -4,7 +4,10 @@ import { GIORNI_COMPLETI_VALIDI } from "../../constants";
 
 export async function GET(request: Request) {
     const authHeader = request.headers.get("authorization")
-    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    const isVercelCron = request.headers.get("x-vercel-cron") === "1"
+    const hasValidBearerToken = authHeader === `Bearer ${process.env.CRON_SECRET}`
+
+    if (!isVercelCron && !hasValidBearerToken) {
         return new NextResponse('Access not authorized', { status: 401 });
     }
 
