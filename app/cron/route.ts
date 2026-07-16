@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { fetchTrashRoutine } from "../fetch_trash_routine/fetch_trash_routine"
-import { GIORNI_COMPLETI_VALIDI } from "../../constants";
+import { fetchTrashRoutine } from "../(utils)/server_functions";
+import { GIORNI_COMPLETI_VALIDI } from "../(utils)/constants";
 
 export async function GET(request: Request) {
     const authHeader = request.headers.get("authorization")
@@ -12,18 +12,21 @@ export async function GET(request: Request) {
     }
 
     try {
-        const todayIndex = new Date().getDay()
+        const now = new Date()
+        const romeTimeString = now.toLocaleString("en-US", { timeZone: "Europe/Rome" })
+        const todayIndex = new Date(romeTimeString).getDay()
         const tomorrowIndex = (todayIndex + 1) % 7;
         const tomorrowDay = GIORNI_COMPLETI_VALIDI[tomorrowIndex]
         const calendar = await fetchTrashRoutine()
-        const tomorrowTrash = calendar?.find(
+        const tomorrowTrash = calendar?.filter(
             (item) => tomorrowDay.includes(item.days.toLowerCase().trim())
         )
 
-        if (!tomorrowTrash) {
+        if (tomorrowTrash.length === 0) {
             return NextResponse.json({ message: "Niente da esporre domani", status: 200 });
         }
 
+        const materialiDaEsporre = tomorrowTrash.map(t => t.material).join(" e ");
         const response = await fetch(
             "https://onesignal.com/api/v1/notifications", {
             method: "POST",
@@ -35,7 +38,7 @@ export async function GET(request: Request) {
                 app_id: process.env.NEXT_PUBLIC_ONE_SIGNAL_APP_ID, 
                 included_segments: ["Total Subscriptions"],
                 headings: { it: "🗑️ Promemoria Spazzatura" },
-                contents: { it: `Domani è ${tomorrowDay}. Il materiale da esporre è: ${tomorrowTrash.material}` }
+                contents: { it: `Domani è ${tomorrowDay}. Il materiale da esporre è: ${materialiDaEsporre}` }
             })
         })
 
